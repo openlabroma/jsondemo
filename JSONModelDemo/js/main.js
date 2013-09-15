@@ -1,13 +1,13 @@
 window.onload = function() {
 	
 	var scene = new THREE.Scene();
-	var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+	var camera = new THREE.PerspectiveCamera( 100, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 	var directionalLight = new THREE.DirectionalLight(0xffffff);
 	directionalLight.position.set(0, 0, -1).normalize();
 	scene.add(directionalLight);
 	
-	camera.position.z = -10;
+	camera.position.z = -6;
 	camera.position.x = 3;
 	camera.position.y = 3;
 	
@@ -20,8 +20,14 @@ window.onload = function() {
 	});
 	
 	
-	var renderer = new THREE.WebGLRenderer();
-	renderer.setSize( window.innerWidth / 2, window.innerHeight / 2);
+	var renderer;
+	
+	if (window.WebGLRenderingContext)
+		renderer = new THREE.WebGLRenderer();
+	else
+		renderer = new THREE.CanvasRenderer();
+	
+	renderer.setSize( window.innerWidth / 3, window.innerHeight / 3);
 	
 	var container = document.getElementById("view3d");
 	
