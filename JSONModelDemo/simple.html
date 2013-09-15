@@ -2,53 +2,52 @@
 <head>
 <script src="js/three.min.js"></script>
 <script>
-window.onload = function() {
-	
-	var scene = new THREE.Scene();
-	var camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 0.1, 1000 );
-	
-	var ambient = new THREE.AmbientLight( 0x444444 );
-	scene.add( ambient );
-	
-	var spotLight = new THREE.SpotLight( 0xffffff );
-	spotLight.position.set( 30, 30, 30 );
-	
-	scene.add( spotLight );
-	
-	camera.position.z = 40;
-	camera.position.x = 20;
-	camera.position.y = 30;
-	
-	
-	var loader = new THREE.JSONLoader();
-	loader.load("models/cow.js_model", function(geometry, material) {
-		var mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial( material ));
-		mesh.scale.set( 2, 2, 2 );
-		scene.add(mesh);
-		camera.lookAt(new THREE.Vector3(0, 0, -10));
-	});
-	
-	
-	var renderer;
-	
-	if (window.WebGLRenderingContext)
-		renderer = new THREE.WebGLRenderer();
-	else
-		renderer = new THREE.CanvasRenderer();
-	
-	renderer.setSize( window.innerWidth * .9 , window.innerHeight * .9);
-	
-	var container = document.getElementById("view3d");
-	container.appendChild( renderer.domElement );
-	
-	
-	
-	function render() {
-		requestAnimationFrame(render);
-		renderer.render(scene, camera);
-	}
-	render();
-};
+
+	window.onload = function() {
+
+		var scene = new THREE.Scene();
+		var camera = new THREE.PerspectiveCamera(35, window.innerWidth
+				/ window.innerHeight, 0.1, 1000);
+
+		var ambient = new THREE.AmbientLight(0x444444);
+		scene.add(ambient);
+
+		var spotLight = new THREE.SpotLight(0xffffff);
+		spotLight.position.set(30, 30, 30);
+
+		scene.add(spotLight);
+
+		camera.position.z = 40;
+		camera.position.x = 20;
+		camera.position.y = 30;
+
+		var loader = new THREE.JSONLoader();
+		loader.load("models/cow.js_model", function(geometry, material) {
+			var mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(
+					material));
+			mesh.scale.set(2, 2, 2);
+			scene.add(mesh);
+			camera.lookAt(new THREE.Vector3(0, 0, -10));
+		});
+
+		var renderer;
+
+		if (window.WebGLRenderingContext)
+			renderer = new THREE.WebGLRenderer();
+		else
+			renderer = new THREE.CanvasRenderer();
+
+		renderer.setSize(window.innerWidth * .9, window.innerHeight * .9);
+
+		var container = document.getElementById("view3d");
+		container.appendChild(renderer.domElement);
+
+		function render() {
+			requestAnimationFrame(render);
+			renderer.render(scene, camera);
+		}
+		render();
+	};
 </script>
 <style>
 body {
